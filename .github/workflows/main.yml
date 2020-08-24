@@ -21,6 +21,8 @@ jobs:
 
     - name: Save earthquakes.json file to the repository
       run: |
+        git config --global user.email "yigitsadic@gmail.com"
+        git config --global user.name "Yigit Sadic"
         git add earthquakes.json
         git commit -m "Routine file update."
         git push
