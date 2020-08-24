@@ -3,8 +3,8 @@
 name: Run candela image
 
 on:
-  push:
-    branches: [ master ]
+  schedule:
+    - cron:  '10 * * * *'
 
 jobs:
   run_image:
