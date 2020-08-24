@@ -1,20 +1,21 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/yigitsadic/gocandela/client"
-	"github.com/yigitsadic/gocandela/handlers"
-	"log"
-	"net/http"
+	"os"
 )
 
 func main() {
 	c := client.NewHTTPClient()
-
-	http.HandleFunc("/", handlers.EarthquakeHandler(c))
-
-	log.Println("Server started on port 8080")
-	err := http.ListenAndServe(":8080", nil)
+	c.Fetch()
+	res, err := c.ParseLines()
 	if err != nil {
-		log.Fatal("unable to listen on port 8080")
+		os.Exit(1)
+	}
+
+	err = json.NewEncoder(os.Stdout).Encode(res)
+	if err != nil {
+		os.Exit(1)
 	}
 }

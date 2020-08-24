@@ -18,23 +18,13 @@ func NewHTTPClient() *HTTPClient {
 	return &HTTPClient{Re: regexp.MustCompile(shared.LineMatcher)}
 }
 
-func (h *HTTPClient) ParseToLines() ([]models.Earthquake, error) {
+func (h *HTTPClient) ParseLines() ([]models.Earthquake, error) {
 	sm := h.Re.FindAllStringSubmatch(h.Response, -1)
 
 	var earthquakes []models.Earthquake
 
 	for _, element := range sm {
-		earthquakes = append(earthquakes, models.Earthquake{
-			Date:      element[1],
-			Time:      element[2],
-			Latitude:  element[3],
-			Longitude: element[4],
-			Depth:     element[5],
-			Md:        element[6],
-			Ml:        element[7],
-			Mw:        element[8],
-			Location:  element[9],
-		})
+		earthquakes = append(earthquakes, *models.NewEarthquake(element))
 	}
 
 	return earthquakes, nil
