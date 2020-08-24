@@ -1,8 +1,3 @@
 # gocandela
 
-This is a HTTP server that provides the latest earthquakes from Kandilli.
-
-## TODO
-
-+ Cache results for n seconds.
-+ Configurable port via env variable.
+This docker image pulls the latest earthquakes and stores them in a json file every 5 minutes.
