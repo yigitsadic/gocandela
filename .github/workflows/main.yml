@@ -19,9 +19,8 @@ jobs:
     - name: Run a one-line script
       run: docker run --rm yigitsadic/gocandela > earthquakes.json
 
-    - uses: EndBug/add-and-commit@v4
-      with:
-        add: earthquakes.json
-        message: "CRON earthquake commit."
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Save earthquakes.json file to the repository
+      run: |
+        git add earthquakes.json
+        git commit -m "Routine file update."
+        git push
