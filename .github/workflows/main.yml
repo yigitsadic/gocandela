@@ -23,6 +23,5 @@ jobs:
       run: |
         git config --global user.email "yigitsadic@gmail.com"
         git config --global user.name "Yigit Sadic"
-        git add earthquakes.json
-        git commit -m "Routine file update."
+        git commit -am "Routine file update."
         git push
