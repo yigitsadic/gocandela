@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"regexp"
+	"time"
 )
 
 type HTTPClient struct {
@@ -31,7 +32,11 @@ func (h *HTTPClient) ParseLines() ([]models.Earthquake, error) {
 }
 
 func (h *HTTPClient) Fetch() {
-	res, err := http.Get(shared.BaseURL)
+	c := http.Client{
+		Timeout: 10 * time.Second,
+	}
+
+	res, err := c.Get(shared.BaseURL)
 	if err != nil {
 		log.Fatalf("Unable to fetch from Kandilli")
 	}
