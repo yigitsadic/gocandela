@@ -4,7 +4,6 @@ import (
 	"github.com/yigitsadic/gocandela/models"
 	"github.com/yigitsadic/gocandela/shared"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"regexp"
 	"time"
@@ -36,13 +35,21 @@ func (h *HTTPClient) Fetch() {
 		Timeout: 10 * time.Second,
 	}
 
-	res, err := c.Get(shared.BaseURL)
-	if err != nil {
-		log.Fatalf("Unable to fetch from Kandilli")
+	var again = true
+	var res *http.Response
+	var err error
+
+	for again {
+		res, err = c.Get(shared.BaseURL)
+		if err == nil {
+			again = false
+		}
 	}
 
-	defer res.Body.Close()
+	if res != nil {
+		defer res.Body.Close()
 
-	read, _ := ioutil.ReadAll(res.Body)
-	h.Response = string(read)
+		read, _ := ioutil.ReadAll(res.Body)
+		h.Response = string(read)
+	}
 }
