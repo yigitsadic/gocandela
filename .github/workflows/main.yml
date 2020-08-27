@@ -4,7 +4,7 @@ name: Fetch and write latest earthquakes
 
 on:
   schedule:
-  - cron:  "*/50 * * * *"
+  - cron:  "* */1 * * *"
 
 jobs:
   download_and_write_to_file:
