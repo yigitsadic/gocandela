@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      run: |
-        docker login -p ${{ secrets.DOCKER_PASSWORD }} -u ${{ secrets.DOCKER_USERNAME }}
-        docker build -t yigitsadic/gocandela .
-        docker push yigitsadic/gocandela
+      - name: Checkout code
+        run: |
+          docker login -p ${{ secrets.DOCKER_PASSWORD }} -u ${{ secrets.DOCKER_USERNAME }}
+          docker build -t yigitsadic/gocandela .
+          docker push yigitsadic/gocandela
