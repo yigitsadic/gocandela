@@ -17,7 +17,7 @@ jobs:
       run: docker pull yigitsadic/gocandela
 
     - name: Run a one-line script
-      run: currdate=$(date '+%Y-%m-%d %H:%M:%S') && docker run --rm yigitsadic/gocandela > "db/$currdate.json"
+      run: currdate=$(date '+%Y-%m-%d %H:%M:%S') && docker run --rm yigitsadic/gocandela > "db/$currdate.json" > "db/latest.json"
 
     - name: Save earthquakes.json file to the repository
       run: |
